@@ -22,6 +22,7 @@ Here are the steps that I have taken.
 Additional notes about the process:
 1. I had issues with ```aws lambda update-function-code ...``` . In my working cycle of updating .py, rebuilding the docker image, sending it to ECR, and testing, the version that aws lambda runs seems to be 1 or 2 versions lagging behind. I use ```aws lambda get-function --query 'Configuration.ImageUri' ...``` to verify that aws lambda sees the same image as the one I have in my local desktop. Somehow the problem goes away when I do this.
 2. The wait (```sleep 10```) between two aws lambda invocations in the loop is essential. Immediate successive invocations may result in SessionNotCreatedException regardless of the lambda resource (memory and disk) allocation.
+3. Different repositories in the ECR do not share images among them! Use just a single repository with different tags if you want to create several (perhaps unrelated) scrapers based on the same version of selenium.
 
 Notes about albscraper.py:
 1. This script can be tested locally. My desktop is debian trixie. I have installed chromium and chromium-driver, and created two sym links: ```ln -s /usr/bin/chromium chrome``` and ```ln -s /usr/bin/chromedriver /opt/chromedriver``` so that these executables have the same paths as their counterparts in the docker image.
