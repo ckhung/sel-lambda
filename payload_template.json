@@ -1,0 +1,7 @@
+{
+    "delay": 5,
+    "count": 5,
+    "url_template": "URL_TEMPLATE",
+    "s3_path": "S3_PATH",
+    "to_do": "TO_DO_FN"
+}
